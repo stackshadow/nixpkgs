@@ -71,7 +71,7 @@ in {
   };
 
   ###### implementation
-  config = mkIf config.services.code-server.enable {
+  config = mkIf cfg.enable {
     systemd.services.code-server = let
 
     in {
@@ -97,7 +97,7 @@ in {
     };
 
     users.users.code-server =
-      mkIf (config.services.code-server.user == "code-server") {
+      mkIf (cfg.user == "code-server") {
         isNormalUser = true;
         createHome = true;
         description = "code-server user";
