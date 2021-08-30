@@ -112,9 +112,6 @@ in {
         RuntimeDirectory = cfg.user;
         User = cfg.user;
         Restart = "on-failure";
-        # for ping probes
-        AmbientCapabilities = [ "CAP_NET_RAW" ];
-
       };
 
     };
