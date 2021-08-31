@@ -80,7 +80,7 @@ in {
         type = types.str;
       };
 
-      groups = mkOption {
+      extraGroups = mkOption {
         default = [ ];
         description =
           "An array of additional groups for the <literal>${defaultUser}</literal> user.";
@@ -114,13 +114,16 @@ in {
 
     };
 
-    users.users."${defaultUser}" = mkIf (cfg.user == defaultUser) {
-      isNormalUser = true;
-      group = cfg.group;
-      extraGroups = cfg.groups;
-      description = "code-server user";
-      shell = pkgs.bash;
-    };
+    users.users."${cfg.user}" = mkMerge [
+      (mkIf (cfg.user == defaultUser) {
+        isNormalUser = true;
+        description = "code-server user";
+        inherit (cfg) group;
+      })
+      {
+        inherit (cfg) extraGroups;
+      }
+    ];
 
     users.groups."${defaultGroup}" = mkIf (cfg.group == defaultGroup) { };
 
