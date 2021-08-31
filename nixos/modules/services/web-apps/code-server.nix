@@ -103,9 +103,7 @@ in {
       } // cfg.extraEnvironment;
       serviceConfig = {
         ExecStart =
-          "${cfg.package}/bin/code-server --disable-telemetry --bind-addr ${cfg.host}:${
-            toString cfg.port
-          } --auth ${cfg.auth}";
+          "${cfg.package}/bin/code-server --disable-telemetry --bind-addr ${cfg.host}:${toString cfg.port} --auth ${cfg.auth}";
         ExecReload = "${pkgs.coreutils}/bin/kill -HUP $MAINPID";
         RuntimeDirectory = cfg.user;
         User = cfg.user;
