@@ -119,6 +119,7 @@ in {
         inherit (cfg) group;
       })
       {
+        packages = cfg.extraPackages;
         inherit (cfg) extraGroups;
       }
     ];
