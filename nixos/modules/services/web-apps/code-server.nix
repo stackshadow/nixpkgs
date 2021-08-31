@@ -22,7 +22,6 @@ in {
 
       packages = mkOption {
         default = [ ];
-        defaultText = "[]";
         description = "Packages that are available in the PATH of code-server.";
         example = "[ pkgs.go ]";
         type = types.listOf types.package;
@@ -83,7 +82,6 @@ in {
 
       groups = mkOption {
         default = [ ];
-        defaultText = "[]";
         description =
           "An array of additional groups for the <literal>${defaultUser}</literal> user.";
         example = [ "docker" ];
