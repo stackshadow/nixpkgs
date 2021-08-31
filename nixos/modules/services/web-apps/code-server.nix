@@ -20,14 +20,14 @@ in {
         type = types.package;
       };
 
-      packages = mkOption {
+      extraPackages = mkOption {
         default = [ ];
         description = "Packages that are available in the PATH of code-server.";
         example = "[ pkgs.go ]";
         type = types.listOf types.package;
       };
 
-      extra-environment = mkOption {
+      extraEnvironment = mkOption {
         type = types.attrsOf types.str;
         description =
           "Additional environment variables to passed to code-server.";
@@ -97,10 +97,10 @@ in {
       description = "VSCode server";
       wantedBy = [ "multi-user.target" ];
       after = [ "network-online.target" ];
-      path = cfg.packages;
+      path = cfg.extraPackages;
       environment = {
         HASHED_PASSWORD = cfg.hashedPassword;
-      } // cfg.extra-environment;
+      } // cfg.extraEnvironment;
       serviceConfig = {
         ExecStart =
           "${cfg.package}/bin/code-server --disable-telemetry --bind-addr ${cfg.host}:${
